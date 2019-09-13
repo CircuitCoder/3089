@@ -2,7 +2,10 @@
   "dependencies": {
     "@circuitcoder/koa-router": "^7.4.0",
     "@koa/cors": "^3.0.0",
+    "jsonwebtoken": "^8.5.1",
     "koa": "^2.8.1",
+    "koa-body": "^4.1.1",
+    "koa-jwt": "^3.6.0",
     "koa-static": "^5.0.0",
     "mongoose": "^5.7.0"
   },
