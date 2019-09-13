@@ -39,6 +39,7 @@ router.post('/', async ctx => {
   const collided = await Reservation.findOne({
     from: { $lt: to },
     to: { $gt: from },
+    deleted: { $ne: true },
   });
 
   if(collided) {
@@ -56,10 +57,10 @@ router.post('/', async ctx => {
 });
 
 router.delete('/:id', async ctx => {
-  if(!ctx.state.user) return ctx.status = 403;
-  const user = await User.findById(ctx.state.user._id);
+  // if(!ctx.state.user) return ctx.status = 403;
+  // const user = await User.findById(ctx.state.user._id);
 
-  if(!user.isAdmin) return ctx.status = 403;
+  // if(!user.isAdmin) return ctx.status = 403;
 
   const found = await Reservation.findOneAndUpdate({
     _id: ctx.params.id,

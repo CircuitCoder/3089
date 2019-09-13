@@ -1,6 +1,9 @@
 import { BACKEND } from './config';
 
 async function parseResp(resp) {
+  if(resp.status === 204) return null;
+  if(resp.status !== 200) throw new Error(`Unexpected status: ${resp.status}`);
+
   const [, type] = resp.headers.get('Content-Type').match(/^([a-zA-Z0-9/]+)(; charset=.*)?$/);
 
   if(type === 'text/plain')

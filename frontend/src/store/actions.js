@@ -44,3 +44,14 @@ export const create = payload =>
 
     dispatch(refresh());
   };
+
+export const del = id =>
+  async (dispatch, getState) => {
+    const { user } = getState();
+    let token = null;
+    if(user) token = user.token;
+
+    const resp = await get(`/reservation/${id}`, token, 'DELETE');
+
+    dispatch(refresh());
+  };

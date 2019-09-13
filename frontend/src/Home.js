@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 
-import { refresh } from './store/actions';
+import { refresh, del } from './store/actions';
 
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
@@ -17,13 +17,16 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
 const mapS2P = state => ({
   data: state.data,
+  user: state.user,
 });
 
 const mapD2P = dispatch => ({
   doRefresh: () => dispatch(refresh()),
+  doDelete: id => dispatch(del(id)),
 });
 
 const styles = makeStyles(theme => ({
@@ -54,7 +57,7 @@ const styles = makeStyles(theme => ({
   },
 }));
 
-function Home({ doRefresh, data }) {
+function Home({ doRefresh, doDelete, data, user }) {
   const cls = styles();
 
   useEffect(() => {
@@ -88,6 +91,8 @@ function Home({ doRefresh, data }) {
               { data.nextUp.map(e => <ListItem key={e._id}>
                 <ListItemIcon><Icon>event</Icon></ListItemIcon>
                 <ListItemText primary={e.title} secondary={`${new Date(e.from)} - ${new Date(e.to)}`} />
+                { user && user.isAdmin ?
+                    <ListItemSecondaryAction><IconButton onClick={() => doDelete(e._id)}><Icon>delete</Icon></IconButton></ListItemSecondaryAction> : null }
               </ListItem>) }
             </List>
           </CardContent>
