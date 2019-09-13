@@ -15,7 +15,7 @@ router.get('/', async ctx => {
   let nextUp = await Reservation.find({
     from: { $gt: now },
     deleted: { $ne: true },
-  }).sort({ from: 1 }).limit(2).populate('by', 'name').populate('participants', 'name');
+  }).sort({ from: 1 }).limit(3).populate('by', 'name').populate('participants', 'name');
 
   return ctx.body = {
     current, nextUp,
