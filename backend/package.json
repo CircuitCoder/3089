@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "@circuitcoder/koa-router": "^7.4.0",
+    "@koa/cors": "^3.0.0",
+    "koa": "^2.8.1",
+    "koa-static": "^5.0.0",
+    "mongoose": "^5.7.0"
+  },
+  "scripts": {
+    "start": "node --experimental-modules --es-module-specifier-resolution=node main.mjs"
+  }
+}
