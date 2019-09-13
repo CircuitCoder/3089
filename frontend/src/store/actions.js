@@ -1,4 +1,4 @@
-import { get } from '../util';
+import { get, post } from '../util';
 
 export const login = payload => ({
   type: 'LOGIN',
@@ -32,4 +32,15 @@ export const refresh = () =>
     const resp = await get('/reservation', token);
 
     dispatch(update(resp));
+  };
+
+export const create = payload =>
+  async (dispatch, getState) => {
+    const { user } = getState();
+    let token = null;
+    if(user) token = user.token;
+
+    const resp = await post('/reservation', payload, token);
+
+    dispatch(refresh());
   };

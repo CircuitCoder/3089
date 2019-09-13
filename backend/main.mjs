@@ -6,6 +6,7 @@ import { readFile, exists } from 'fs';
 import { promisify } from 'util';
 import JWT from 'koa-jwt';
 import CORS from '@koa/cors';
+import Body from 'koa-body';
 
 import consts from './consts';
 import { SECRET } from './config'
@@ -15,6 +16,7 @@ async function buildApp() {
   const app = new Koa();
 
   app.use(CORS());
+  app.use(Body());
   app.use(JWT({ secret: SECRET, passthrough: true }));
   app.use(routes.routes(), routes.allowedMethods());
 

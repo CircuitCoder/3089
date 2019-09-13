@@ -52,7 +52,7 @@ router.post('/', async ctx => {
     participants: [],
   });
 
-  return { _id: reservation._id };
+  return ctx.body = { _id: reservation._id };
 });
 
 router.delete('/:id', async ctx => {
