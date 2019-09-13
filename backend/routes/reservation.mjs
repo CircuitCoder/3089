@@ -27,7 +27,7 @@ router.get('/:id', async ctx => {
 });
 
 router.post('/', async ctx => {
-  if(!ctx.state.user) return ctx.status = 403;
+  // if(!ctx.state.user) return ctx.status = 403;
 
   const { from, to, title } = ctx.request.body;
 
@@ -48,7 +48,6 @@ router.post('/', async ctx => {
 
   const reservation = await Reservation.create({
     from, to, title,
-    // TODO: jwt auth
     by: null,
     participants: [],
   });
